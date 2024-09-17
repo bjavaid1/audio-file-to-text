@@ -1,5 +1,5 @@
 import functions_framework
-from google.cloud import speech_v1p1beta1 as speech
+from google.cloud import speech
 from google.cloud import storage
 
 @functions_framework.cloud_event
