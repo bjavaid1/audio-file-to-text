@@ -28,20 +28,33 @@ Ensure that the following APIs are enabled for your Google Cloud project:
 - Cloud Storage API
 - Cloud Speech-to-Text API
 
-### 2. Deploy the Function
-1. Create a Cloud Storage bucket if you don't already have one.
-2. Deploy the function using the following steps:
-   ```bash
-   gcloud functions deploy speech-to-text \
-   --runtime python39 \
-   --trigger-resource [BUCKET_NAME] \
-   --trigger-event google.storage.object.finalize \
-   --entry-point speech_to_text \
-   --region [REGION]
-   ```
-   Replace:
-   - `[BUCKET_NAME]` with the name of your Cloud Storage bucket.
-   - `[REGION]` with the region where you want to deploy your function (e.g., `us-central1`).
+### 2. Deploy the Function Using the Google Cloud Console
+
+#### Option 1: Using the Google Cloud Console (GUI)
+As an alternative to using the command-line interface (CLI), you can deploy the function using the **Google Cloud Console**:
+1. Go to the **Cloud Functions** section in the Google Cloud Console: [Cloud Functions Console](https://console.cloud.google.com/functions).
+2. Click on **Create Function**.
+3. In the GUI, specify the function name, region, and other settings.
+4. Choose the trigger type as **Cloud Storage** and set the event to **Finalize/Create**.
+5. For the source code, either:
+   - Enter the source code manually in the **inline editor**.
+   - Upload a ZIP file containing the source code.
+6. Configure the entry point (e.g., `speech_to_text`), runtime (Python 3.9), and environment variables.
+7. Click **Deploy** to launch your function.
+
+#### Option 2: Using the CLI
+Alternatively, you can deploy the function using the Google Cloud CLI:
+```bash
+gcloud functions deploy speech-to-text \
+--runtime python39 \
+--trigger-resource [BUCKET_NAME] \
+--trigger-event google.storage.object.finalize \
+--entry-point speech_to_text \
+--region [REGION]
+```
+Replace:
+- `[BUCKET_NAME]` with the name of your Cloud Storage bucket.
+- `[REGION]` with the region where you want to deploy your function (e.g., `us-central1`).
 
 ### 3. Upload Audio Files
 Once the function is deployed:
